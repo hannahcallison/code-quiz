@@ -1,127 +1,182 @@
-var highscoreBtn = document.querySelector("#highScores")
-var quizTitle = document.querySelector("#quizTitle")
-var timerText = document.querySelector("#timer")
-var quizContent = document.querySelector("#quizContent")
-var startBtn = document.querySelector("#start")
-var results = document.querySelector("#result")
-var quizQuestions = [
-    {
-      question: "What does 'www' stand for in a website browser?",
-      answers: {
-          a: 'Watchful World Wrestling',
-          b: 'Wacky Warm Wildflower',
-          c: 'World Wide Web',
-          d: 'Wealthy Wild Wordsmiths',
-    },
-    correctAnswer: 'c'
-},
-    {
-        question: "What is the name of the largest ocean on Earth?",
-        answers: {
-            a: 'Atlantic',
-            b: 'Pacific',
-            c: 'Indian',
-            d: 'Arctic'
-        },
-        correctAnswer: 'b'
-},
-    {
-        question: "How many hearts does an octopus have?",
-        answers: {
-            a: '1',
-            b: '2',
-            c: '3',
-            d: '4'
-        },
-        correctAnswer:'c'
-},
-    {
-        question: "What is the hottest planet in the solar  system?",
-        answers: {
-            a: 'Mercury',
-            b: 'Pluto',
-            c: 'Mars',
-            d: 'Venus'
-        },
-        correctAnswer:'d'
-},
+var startBtn = document.getElementById("start")
+var nextBtn = document.getElementById("next")
+var result = document.getElementById("result")
+var highScore = document.getElementById("highScores")
+var quizQ = document.getElementById("quizQ")
+var ansA = document.getElementById('answerBtn1')
+var ansB = document.getElementById('answerBtn2')
+var ansC = document.getElementById('answerBtn3')
+var ansD = document.getElementById('answerBtn4')
+var hideOptions = document.querySelectorAll('.ansBtn')
+var pageSelect = document.querySelector("section")
+var highScoreTotal = 0
 
-    {
-        question: "The Statue of Liberty was a gift to the United States from which country?",
-        answers: {
-            a: 'Belgium',
-            b: 'Germany',
-            c: 'Spain',
-            d: 'France'
-        },
-        correctAnswer:'d'
-},   
-    {
-        question: "The human boody is made up of approximately how much water?",
-        answers: {
-            a: '40%',
-            b: '50%',
-            c: '60%',
-            d: '70%'
-        },
-        correctAnswer:'c'
-},   
-    {
-        question: "Where did Spiderman get his powers from?",
-        answers: {
-            a: 'Bitten by a radioactive spider',
-            b: 'Scientific Experiment',
-            c: 'After a dream',
-            d: 'Born with them'
-        },
-        correctAnswer:'a'
-},   
-    {
-        question: "Sodium bicarbonate is a staple in most kitchens. What is its other name?",
-        answers: {
-            a: 'Vinegar',
-            b: 'Baking Soda',
-            c: 'Sugar',
-            d: 'Salt'
-        },
-        correctAnswer:'b'
-},   
-    {
-        question: "Cu is the chemical symbol for which element?",
-        answers: {
-            a: 'Oxygen',
-            b: 'Copper',
-            c: 'Zinc',
-            d: 'Caesium'
-        },
-     correctAnswer:'b'
-},   
-    {
-        question: "How many colors are in the rainbow?",
-        answers: {
-            a: '7',
-            b: '6',
-            c: '10',
-            d: '5'
-        },
-    correctAnswer:'a'
-},
-]
-var nextQuestionArr;
-var timeLeft = 15;
+highScore.addEventListener('click', displayHighScores)
+startBtn.addEventListener('click', startQuiz)
 
-function nextQuestion (){
-    nextQuestionArr = quizQuestions[Math.floor(Math.random() * quizQuestions.length)];
-    
-    startBtn.addEventListener("click", nextQuestion)
+function enableBtn (){
+    hideOptions.forEach(function(hideOption){
+        hideOption.removeAttribute("disabled")
+    })
 }
 
-function startQuiz (){
-    startBtn.textContent = "Next Question"
-    startBtn.addEventListener("click", nextQuestion)
-
+function disableBtn (){
+    hideOptions.forEach(function(hideOption){
+        hideOption.setAttribute("disabled", true)
+    })
 }
 
-startBtn.addEventListener("click", startQuiz)
+function startQuiz(){
+    startBtn.style.display="none"
+    nextBtn.style.display ="block"
+    quizBtns.style.display="block"
+    result.style.display="block"
+    displayQuestion1()
+}
 
-nextQuestion()
+function displayQuestion1 (){
+    quizQ.textContent = "What does 'www' stand for in a website browser?"
+    ansA.textContent = "Watchful World Wrestling"
+    ansB.textContent = "Wacky Warm Wildflower"
+    ansC.textContent = "World Wide Web"
+    ansD.textContent = "Wealthy Wild Wordsmiths"
+    ansA.onclick = function(){
+        result.textContent = "Incorrect"
+        disableBtn ()
+    }
+    ansB.onclick = function(){
+        result.textContent = "Incorrect"
+        disableBtn ()
+    }
+    ansC.onclick = function(){
+        result.textContent = "Correct +10 pts"
+        disableBtn ()
+        highScoreTotal+=10;
+    }
+    ansD.onclick = function(){
+        result.textContent = "Incorrect"
+        disableBtn ()
+    }
+    nextBtn.addEventListener('click', displayQuestion2)
+}
+
+function displayQuestion2(){
+    enableBtn ()
+    quizQ.textContent = "What is the name of the largest ocean on Earth?"
+    ansA.textContent = "Atlantic"
+    ansB.textContent = "Pacific"
+    ansC.textContent = "Indian"
+    ansD.textContent = "Arctic"
+    ansA.onclick = function(){
+        result.textContent = "Incorrect"
+        disableBtn ()
+    }
+    ansB.onclick = function(){
+        result.textContent = "Correct +10pts"
+        disableBtn ()
+        highScoreTotal+=10;
+    }
+    ansC.onclick = function(){
+        result.textContent = "Incorrect"
+        disableBtn ()
+    }
+    ansD.onclick = function(){
+        result.textContent = "Incorrect"
+        disableBtn ()
+    }
+    nextBtn.addEventListener('click', displayQuestion3)
+}
+
+function displayQuestion3(){
+    enableBtn ()
+    quizQ.textContent = "How many hearts does an octopus have?"
+    ansA.textContent = "1"
+    ansB.textContent = "2"
+    ansC.textContent = "3"
+    ansD.textContent = "4"
+    ansA.onclick = function(){
+        result.textContent = "Incorrect"
+        disableBtn ()
+    }
+    ansB.onclick = function(){
+        result.textContent = "Incorrect"
+        disableBtn ()
+    }
+    ansC.onclick = function(){
+        result.textContent = "Correct +10pts"
+        disableBtn ()
+        highScoreTotal+=10;
+    }
+    ansD.onclick = function(){
+        result.textContent = "Incorrect"
+        disableBtn ()
+    }
+    nextBtn.addEventListener('click', displayQuestion4)
+}
+
+function displayQuestion4(){
+    enableBtn ()
+    quizQ.textContent = "What is the hottest planet in the solar  system?"
+    ansA.textContent = "Mercury"
+    ansB.textContent = "Pluto"
+    ansC.textContent = "Mars"
+    ansD.textContent = "Venus"
+    ansA.onclick = function(){
+        result.textContent = "Incorrect"
+        disableBtn ()
+    }
+    ansB.onclick = function(){
+        result.textContent = "Incorrect"
+        disableBtn ()
+    }
+    ansC.onclick = function(){
+        result.textContent = "Incorrect"
+        disableBtn ()
+    }
+    ansD.onclick = function(){
+        result.textContent = "Correct +10pts"
+        disableBtn ()
+        highScoreTotal+=10;
+    }
+    nextBtn.addEventListener('click', displayQuestion5)
+}
+
+function displayQuestion5(){
+    enableBtn ()
+    quizQ.textContent = "Sodium bicarbonate is a staple in most kitchens. What is its other name?"
+    ansA.textContent = "Vinegar"
+    ansB.textContent = "Baking Soda"
+    ansC.textContent = "Sugar"
+    ansD.textContent = "Salt"
+    ansA.onclick = function(){
+        result.textContent = "Incorrect"
+        disableBtn ()
+    }
+    ansB.onclick = function(){
+        result.textContent = "Correct +10pts"
+        disableBtn ()
+        highScoreTotal+=10;
+    }
+    ansC.onclick = function(){
+        result.textContent = "Incorrect"
+        disableBtn ()
+    }
+    ansD.onclick = function(){
+        result.textContent = "Incorrect"
+        disableBtn ()
+    }
+    nextBtn.addEventListener('click', displayHighScores)
+}
+
+document.getElementById('submit').addEventListener("click", function(){
+    var userInitials = document.getElementById('nameInput').value
+    let score = {initials: userInitials, score: highScoreTotal}
+    localStorage.setItem("highScorePlay", JSON.stringify(score))
+}
+)
+function displayHighScores (){
+    pageSelect.style.display="none"
+    document.getElementById('highScoreBoard').style.display="block"
+    document.getElementById('scoreIndex').textContent = highScoreTotal
+}
+
