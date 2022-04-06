@@ -18,3 +18,4 @@ he following animation demonstrates the application functionality:
 
 
 **Link to published password generator:** 
+https://hannahcallison.github.io/code-quiz/
