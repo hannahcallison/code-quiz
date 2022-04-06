@@ -52,3 +52,33 @@ section button {
     margin: 10px;
     margin-left: 10px;
 }
+
+#highScoreTitle {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#nameInput {
+    margin-left: 44%;
+    margin-top: 10px;
+}
+
+#submit {
+    padding: 5px;
+}
+
+#yourScore {
+    text-align: center;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+#firstName {
+    text-align: center;
+    margin-top: 20px;
+}
+
+li {
+    text-align: center;
+    margin-top: 10px;
+}

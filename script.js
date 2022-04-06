@@ -2,6 +2,7 @@ var startBtn = document.getElementById("start")
 var nextBtn = document.getElementById("next")
 var result = document.getElementById("result")
 var highScore = document.getElementById("highScores")
+var timer = document.getElementById('timer')
 var quizQ = document.getElementById("quizQ")
 var ansA = document.getElementById('answerBtn1')
 var ansB = document.getElementById('answerBtn2')
@@ -10,9 +11,28 @@ var ansD = document.getElementById('answerBtn4')
 var hideOptions = document.querySelectorAll('.ansBtn')
 var pageSelect = document.querySelector("section")
 var highScoreTotal = 0
+var secondsLeft = 5;
 
 highScore.addEventListener('click', displayHighScores)
 startBtn.addEventListener('click', startQuiz)
+
+
+function setTime() {
+    var secondsLeft = 10;
+    // Sets interval in variable
+    var timerInterval = setInterval(function() {
+      secondsLeft--;
+      timer.textContent = secondsLeft + " seconds left";
+  
+      if(secondsLeft === 0) {
+        // Stops execution of action at set interval
+        clearInterval(timerInterval);
+        // Calls function to create and append image
+        displayHighScores()
+      }
+  
+    }, 1000);
+  }
 
 function enableBtn (){
     hideOptions.forEach(function(hideOption){
@@ -35,6 +55,7 @@ function startQuiz(){
 }
 
 function displayQuestion1 (){
+    setTime();
     quizQ.textContent = "What does 'www' stand for in a website browser?"
     ansA.textContent = "Watchful World Wrestling"
     ansB.textContent = "Wacky Warm Wildflower"
@@ -168,15 +189,26 @@ function displayQuestion5(){
     nextBtn.addEventListener('click', displayHighScores)
 }
 
-document.getElementById('submit').addEventListener("click", function(){
-    var userInitials = document.getElementById('nameInput').value
-    let score = {initials: userInitials, score: highScoreTotal}
-    localStorage.setItem("highScorePlay", JSON.stringify(score))
-}
-)
 function displayHighScores (){
     pageSelect.style.display="none"
-    document.getElementById('highScoreBoard').style.display="block"
-    document.getElementById('scoreIndex').textContent = highScoreTotal
+    document.getElementById('highScoreBoard').style.display="block";
+    document.getElementById('yourScore').textContent = "Your Score: " + highScoreTotal;
 }
+
+
+function renderScores (){
+    var userScoreAndName = "Your Name: " + localStorage.getItem("userName")+ " and " + "Your Score:" + localStorage.getItem("userScore")
+    var li = document.createElement('li')
+    document.getElementById("savedScores").appendChild(li);
+    li.innerHTML = userScoreAndName
+} 
+
+document.getElementById("submit").onclick = function(event) {
+    event.preventDefault()
+    let nameInput = document.getElementById("nameInput")
+    localStorage.setItem("userName", nameInput.value)
+    localStorage.setItem("userScore", highScoreTotal)
+    renderScores()
+}
+
 

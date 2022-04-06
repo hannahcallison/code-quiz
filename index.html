@@ -10,25 +10,21 @@
 </head>
 
 <body>
-    <!-- Highscores saved locally in top left hand corner -->
-    <!-- Beginning text Code Quiz Challenge with instructions and start button -->
-    <!-- Main with header that changes with question -->
-    <!-- answer choices that can be clicked and  has 'footer' with  correct or incorrect -->
-    <!-- timer in top right hand corner -->
-    <!-- When quiz  is done has  scoresaved and enter initials for high score board -->
-    <!-- Go back or clear highscores -->
     <main>
         <header>
             <button id="highScores">High Scores</button>
         </header>
         <div id="highScoreBoard" style="display:none">
-        <p id="scoreIndex"></p>
+        <p id="yourScore"></p>
+        <p id="firstName">Enter Your First Name Here:</p>
         <input type="text" id="nameInput">
         <button id="submit">submit</button>
+        <p id="highScoreTitle">High Scores</p>
+        <ul id="savedScores"></ul>
         </div>
         <section>
             <h1 id="quizTitle">Code Quiz Challenge</h1>
-            <p class="timerStyle"><span id="timer">10</span> seconds left!</p>
+            <p class="timerStyle"><span id="timer"></span></p>
             <p id="quizQ">Welcome to the Quiz! You have 10 seconds to answer each question. At the end, you will have the chance to enter your intitials to join the High Score List! Good luck!</p>
         
             <div id="quizBtns" style="display: none">
