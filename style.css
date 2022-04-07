@@ -56,6 +56,7 @@ section button {
 #highScoreTitle {
     text-align: center;
     margin-top: 20px;
+    font-weight: 20px;
 }
 
 #nameInput {
@@ -83,6 +84,7 @@ section button {
 }
 
 li {
-    text-align: center;
     margin-top: 10px;
+    text-align: center;
+    list-style-type: none;
 }
